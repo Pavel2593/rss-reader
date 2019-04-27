@@ -11,27 +11,27 @@
 </head>
 <body>
     <div class="page">
-        <div class="widget">
-            <div class="widget__logo"></div>
-            <a class="widget__btn" href="#">Добавить ленту</a>
-            <div class="widget__line"></div>
-            <div class="widget__group">
-                <i class="material-icons size-icons color_purple margin_for_icon_in_group_list">radio_button_checked</i>
-                <div class="group__title">Программирование (1)</div>
-                <i class="material-icons group__delete_icon">delete</i>
+        <div class="sidebar">
+            <div class="sidebar__logo"></div>
+            <a class="sidebar__btn" href="#">Добавить ленту</a>
+            <div class="sidebar__line"></div>
+            <div class="sidebar__feed-group">
+                <i class="material-icons size-icons color_purple margin_for_icon_in_feed-group_list">radio_button_checked</i>
+                <div class="feed-group__title">Программирование (1)</div>
+                <i class="material-icons feed-group__delete_icon">delete</i>
             </div>
-            <div class="widget__group ">
-                <i class="material-icons size-icons color_aqua margin_for_icon_in_group_list">radio_button_checked</i>
-                <div class="group__title">Дизайн (0)</div>
-                <i class="material-icons group__delete_icon">delete</i>
+            <div class="sidebar__feed-group ">
+                <i class="material-icons size-icons color_aqua margin_for_icon_in_feed-group_list">radio_button_checked</i>
+                <div class="feed-group__title">Дизайн (0)</div>
+                <i class="material-icons feed-group__delete_icon">delete</i>
             </div>
-            <div class="widget__group">
-                <i class="material-icons size-icons color_red margin_for_icon_in_group_list">radio_button_checked</i>
-                <div class="group__title">Смешнявки (0)</div>
-                <i class="material-icons group__delete_icon">delete</i>
+            <div class="sidebar__feed-group">
+                <i class="material-icons size-icons color_red margin_for_icon_in_feed-group_list">radio_button_checked</i>
+                <div class="feed-group__title">Смешнявки (0)</div>
+                <i class="material-icons feed-group__delete_icon">delete</i>
             </div>
-            <form class="widget__form">
-                <select class="material-icons widget_select">
+            <form class="sidebar__form">
+                <select class="material-icons sidebar__select">
                     <option class="material-icons size-icons color_red">radio_button_checked</option>
                     <option class="material-icons size-icons color_orange">radio_button_checked</option>
                     <option class="material-icons size-icons color_yellow">radio_button_checked</option>
@@ -40,40 +40,40 @@
                     <option class="material-icons size-icons color_blue">radio_button_checked</option>
                     <option class="material-icons size-icons color_purple">radio_button_checked</option>
                 </select>
-                <input class="widget__create_new_group" type="text" ng-model="groupName" placeholder="Научные факты">
+                <input class="sidebar__create_new_feed-group" type="text" placeholder="Научные факты">
             </form>
         </div>
         <div class="wrap_content">
             <input class="content__search" type="search" placeholder="Поиск по новостям...">
             <div class="content">
                 <div class="content__list">
-                    <div class="link_to_article">
-                        <h1 class="link_to_article__title">Хабра</h1>
-                        <p class="link_to_article__URL">http:habrahabr.ru/rss</p>
-                        <i class="material-icons link_to_article__edit_icon">edit</i>
-                        <i class="material-icons link_to_article__delete_icon">delete</i>
-                        <i class="material-icons link_to_article__navigate_next_icon">navigate_next</i>
+                    <div class="article-link">
+                        <h1 class="article-link__title">Хабра</h1>
+                        <p class="article-link__url">http:habrahabr.ru/rss</p>
+                        <i class="material-icons article-link__edit_icon">edit</i>
+                        <i class="material-icons article-link__delete_icon">delete</i>
+                        <i class="material-icons article-link__navigate_next_icon">navigate_next</i>
                     </div>
-                    <div class="link_to_article">
-                        <h1 class="link_to_article__title">Хабра</h1>
-                        <p class="link_to_article__URL">http:habrahabr.ru/rss</p>
-                        <i class="material-icons link_to_article__edit_icon">edit</i>
-                        <i class="material-icons link_to_article__delete_icon">delete</i>
-                        <i class="material-icons link_to_article__navigate_next_icon">navigate_next</i>
+                    <div class="article-link">
+                        <h1 class="article-link__title">Хабра</h1>
+                        <p class="article-link__url">http:habrahabr.ru/rss</p>
+                        <i class="material-icons article-link__edit_icon">edit</i>
+                        <i class="material-icons article-link__delete_icon">delete</i>
+                        <i class="material-icons article-link__navigate_next_icon">navigate_next</i>
                     </div>
-                    <div class="link_to_article">
-                        <h1 class="link_to_article__title">Хабра</h1>
-                        <p class="link_to_article__URL">http:habrahabr.ru/rss</p>
-                        <i class="material-icons link_to_article__edit_icon">edit</i>
-                        <i class="material-icons link_to_article__delete_icon">delete</i>
-                        <i class="material-icons link_to_article__navigate_next_icon">navigate_next</i>
+                    <div class="article-link">
+                        <h1 class="article-link__title">Хабра</h1>
+                        <p class="article-link__url">http:habrahabr.ru/rss</p>
+                        <i class="material-icons article-link__edit_icon">edit</i>
+                        <i class="material-icons article-link__delete_icon">delete</i>
+                        <i class="material-icons article-link__navigate_next_icon">navigate_next</i>
                     </div>
-                    <div class="link_to_article">
-                        <h1 class="link_to_article__title">Хабра</h1>
-                        <p class="link_to_article__URL">http:habrahabr.ru/rss</p>
-                        <i class="material-icons link_to_article__edit_icon">edit</i>
-                        <i class="material-icons link_to_article__delete_icon">delete</i>
-                        <i class="material-icons link_to_article__navigate_next_icon">navigate_next</i>
+                    <div class="article-link">
+                        <h1 class="article-link__title">Хабра</h1>
+                        <p class="article-link__url">http:habrahabr.ru/rss</p>
+                        <i class="material-icons article-link__edit_icon">edit</i>
+                        <i class="material-icons article-link__delete_icon">delete</i>
+                        <i class="material-icons article-link__navigate_next_icon">navigate_next</i>
                     </div>
                 </div>
                 <div class="content__article">
