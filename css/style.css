@@ -187,16 +187,6 @@ html, body {
     outline: none;
 }
 
-.sidebar__create_new_feed-group::-webkit-input-placeholder { /* WebKit browsers */
-    color: #ffffff;
-}
-.sidebar__create_new_feed-group::-moz-placeholder { /* Mozilla Firefox 19+ */
-    color: #ffffff;
-}
-.sidebar__create_new_feed-group:-ms-input-placeholder { /* Internet Explorer 10+ */
-    color: #ffffff;
-}
-
 .wrap_content {
     background-color: #f0f1f5;
     padding-top: 14px;
