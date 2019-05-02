@@ -183,6 +183,8 @@ html, body {
     padding-left: 12px;
     color: #ffffff;
     background-color: #30333a;
+    font-family: "Open Sans", sans-serif;
+    font-size: 13px;
     border: none;
     outline: none;
 }
@@ -202,6 +204,8 @@ html, body {
     margin-bottom: 10px;
     border: 1px solid #cccccc;
     border-radius: 3px;
+    font-family: "Open Sans", sans-serif;
+    font-size: 13px;
     flex-shrink: 0;
     outline: none;
 }
