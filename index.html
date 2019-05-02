@@ -5,6 +5,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="css/reset.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotel</title>
@@ -15,20 +16,22 @@
             <div class="sidebar__logo"></div>
             <a class="sidebar__btn" href="#">Добавить ленту</a>
             <div class="sidebar__line"></div>
-            <div class="sidebar__feed-group">
-                <i class="material-icons size-icons color_purple margin_for_icon_in_feed-group_list">radio_button_checked</i>
-                <div class="feed-group__title">Программирование (1)</div>
-                <i class="material-icons feed-group__delete_icon">delete</i>
-            </div>
-            <div class="sidebar__feed-group ">
-                <i class="material-icons size-icons color_aqua margin_for_icon_in_feed-group_list">radio_button_checked</i>
-                <div class="feed-group__title">Дизайн (0)</div>
-                <i class="material-icons feed-group__delete_icon">delete</i>
-            </div>
-            <div class="sidebar__feed-group">
-                <i class="material-icons size-icons color_red margin_for_icon_in_feed-group_list">radio_button_checked</i>
-                <div class="feed-group__title">Смешнявки (0)</div>
-                <i class="material-icons feed-group__delete_icon">delete</i>
+            <div class="sidebar__list-feed-group">
+                <div class="sidebar__feed-group">
+                    <i class="material-icons size-icons color_purple feed-group__margin-icon">radio_button_checked</i>
+                    <div class="feed-group__title">Программирование (1)</div>
+                    <i class="material-icons feed-group__delete-icon">delete</i>
+                </div>
+                <div class="sidebar__feed-group ">
+                    <i class="material-icons size-icons color_aqua feed-group__margin-icon">radio_button_checked</i>
+                    <div class="feed-group__title">Дизайн (0)</div>
+                    <i class="material-icons feed-group__delete-icon">delete</i>
+                </div>
+                <div class="sidebar__feed-group">
+                    <i class="material-icons size-icons color_red feed-group__margin-icon">radio_button_checked</i>
+                    <div class="feed-group__title">Смешнявки (0)</div>
+                    <i class="material-icons feed-group__delete-icon">delete</i>
+                </div>
             </div>
             <form class="sidebar__form">
                 <select class="material-icons sidebar__select">
@@ -50,40 +53,40 @@
                     <div class="article-link">
                         <h1 class="article-link__title">Хабра</h1>
                         <p class="article-link__url">http:habrahabr.ru/rss</p>
-                        <i class="material-icons article-link__edit_icon">edit</i>
-                        <i class="material-icons article-link__delete_icon">delete</i>
-                        <i class="material-icons article-link__navigate_next_icon">navigate_next</i>
+                        <i class="material-icons article-link__edit-icon">edit</i>
+                        <i class="material-icons article-link__delete-icon">delete</i>
+                        <i class="material-icons article-link__navigate-next-icon">navigate_next</i>
                     </div>
                     <div class="article-link">
                         <h1 class="article-link__title">Хабра</h1>
                         <p class="article-link__url">http:habrahabr.ru/rss</p>
-                        <i class="material-icons article-link__edit_icon">edit</i>
-                        <i class="material-icons article-link__delete_icon">delete</i>
-                        <i class="material-icons article-link__navigate_next_icon">navigate_next</i>
+                        <i class="material-icons article-link__edit-icon">edit</i>
+                        <i class="material-icons article-link__delete-icon">delete</i>
+                        <i class="material-icons article-link__navigate-next-icon">navigate_next</i>
                     </div>
                     <div class="article-link">
                         <h1 class="article-link__title">Хабра</h1>
                         <p class="article-link__url">http:habrahabr.ru/rss</p>
-                        <i class="material-icons article-link__edit_icon">edit</i>
-                        <i class="material-icons article-link__delete_icon">delete</i>
-                        <i class="material-icons article-link__navigate_next_icon">navigate_next</i>
+                        <i class="material-icons article-link__edit-icon">edit</i>
+                        <i class="material-icons article-link__delete-icon">delete</i>
+                        <i class="material-icons article-link__navigate-next-icon">navigate_next</i>
                     </div>
                     <div class="article-link">
                         <h1 class="article-link__title">Хабра</h1>
                         <p class="article-link__url">http:habrahabr.ru/rss</p>
-                        <i class="material-icons article-link__edit_icon">edit</i>
-                        <i class="material-icons article-link__delete_icon">delete</i>
-                        <i class="material-icons article-link__navigate_next_icon">navigate_next</i>
+                        <i class="material-icons article-link__edit-icon">edit</i>
+                        <i class="material-icons article-link__delete-icon">delete</i>
+                        <i class="material-icons article-link__navigate-next-icon">navigate_next</i>
                     </div>
                 </div>
                 <div class="content__article">
                     <div>
-                        <h1 class="article_title">Планы выхода контента.</h1>
-                        <p class="article__bln-read">прочитано</p>
+                        <h1 class="article__title">Планы выхода контента.</h1>
+                        <p class="article__read-status">прочитано</p>
                         <p class="article__data">03.11.2018 в 9:00</p>
                         <button class="article__button">Читать описание</button>
                         <div>
-                            <img class="article_img" src="images/wow_logo.png">
+                            <img class="article__img" src="images/wow_logo.png">
                             <div class="article__text">
                             <p>Хотя в начале будет использоваться версия 1.12, мы хотим открыть для игроков те приключения, которые они ждут. Что касается графика, то мы добавили четыре дополнительных этапа и собираемся со временем ввести представленный контент в игру.</p>
                             <p>1-й этап: Огненные Недра, Ониксия, Забытый Город, Каззак, Азурегос.</p>
@@ -92,26 +95,26 @@
                             <p>4-й этап: рейд «Наксрамас», вторжение Плети.</p>
                             <p>Наши планы еще могут измениться, однако нам хотелось дать вам представление о том, что ждет нас в будущем. У нас впереди еще очень много работы, но нам не терпится узнать ваше мнение.
                             Владельцы обычных и виртуальных билетов BlizzCon 2018 смогут поиграть в демоверсию World of Warcraft Classic уже сегодня! Подробности о демоверсии вы найдете в нашей статье, а информацию о возможных ограничениях — на форуме.</p>
-                        </div>
+                            </div>
                             <div class="article__read-next">Читать дальше→</div>
                         </div>
                         <div class="article__line"></div>
                         <div class="clear"></div>
                     </div>
                     <div>
-                        <h1 class="article_title">Планы выхода контента.</h1>
+                        <h1 class="article__title">Планы выхода контента.</h1>
                         <p class="article__data">03.11.2018 в 9:00</p>
                         <button class="article__button">Читать описание</button>
                         <div class="article__line"></div>
                     </div>
                     <div>
-                        <h1 class="article_title">Планы выхода контента.</h1>
+                        <h1 class="article__title">Планы выхода контента.</h1>
                         <p class="article__data">03.11.2018 в 9:00</p>
                         <button class="article__button">Читать описание</button>
                         <div class="article__line"></div>
                     </div>
                     <div>
-                        <h1 class="article_title">Планы выхода контента.</h1>
+                        <h1 class="article__title">Планы выхода контента.</h1>
                         <p class="article__data">03.11.2018 в 9:00</p>
                         <button class="article__button">Читать описание</button>
                         <div class="article__line"></div>
