@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="groupListApp">
     <head>
         <title>Rss-reader</title>
         <meta charset="utf-8">
@@ -8,73 +8,46 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link href="css/reset.css" rel="stylesheet">
         <link href="css/style.css" rel="stylesheet">
+        <script src="js/jquery-3.3.1.min.js"></script>
+        <script src="js/angular.js"></script>
+        <script src="js/app_angular.js"></script>
+        <script src="js/app.js"></script>
     </head>
-    <body>
+    <body ng-controller="GroupListCtrl">
         <div class="page">
             <div class="sidebar">
                 <div class="sidebar__logo"></div>
                 <a class="sidebar__btn" href="#">Добавить ленту</a>
                 <div class="sidebar__line"></div>
                 <div class="sidebar__list-feed-group">
-                    <div class="sidebar__feed-group">
-                        <i class="material-icons size-icons color_purple feed-group__margin-icon">radio_button_checked</i>
-                        <div class="feed-group__title">Программирование (1)</div>
-                        <i class="material-icons feed-group__delete-icon">delete</i>
-                    </div>
-                    <div class="sidebar__feed-group ">
-                        <i class="material-icons size-icons color_aqua feed-group__margin-icon">radio_button_checked</i>
-                        <div class="feed-group__title">Дизайн (0)</div>
-                        <i class="material-icons feed-group__delete-icon">delete</i>
-                    </div>
-                    <div class="sidebar__feed-group">
-                        <i class="material-icons size-icons color_red feed-group__margin-icon">radio_button_checked</i>
-                        <div class="feed-group__title">Смешнявки (0)</div>
-                        <i class="material-icons feed-group__delete-icon">delete</i>
+                    <div class="sidebar__feed-group" ng-repeat="group in data.groups" ng-click="openLinks ()">
+                        <i class="material-icons size-icons feed-group__margin-icon" ng-class="group.colored">radio_button_checked</i>
+                        <div class="feed-group__title">{{group.name}} ({{group.article_links.length}})</div>
+                        <i class="material-icons feed-group__delete-icon" ng-click="deleteGroup()">delete</i>
                     </div>
                 </div>
                 <form class="sidebar__form">
-                    <select class="material-icons sidebar__select">
-                        <option class="material-icons size-icons color_red">radio_button_checked</option>
-                        <option class="material-icons size-icons color_orange">radio_button_checked</option>
-                        <option class="material-icons size-icons color_yellow">radio_button_checked</option>
-                        <option class="material-icons size-icons color_green">radio_button_checked</option>
-                        <option class="material-icons size-icons color_aqua">radio_button_checked</option>
-                        <option class="material-icons size-icons color_blue">radio_button_checked</option>
-                        <option class="material-icons size-icons color_purple">radio_button_checked</option>
+                    <select class="material-icons sidebar__select" ng-model="groupColor" ng-class="groupColor" ng-init="groupColor='color_red'">
+                        <option class="material-icons size-icons color_red" value="color_red" selected="selected">radio_button_checked</option>
+                        <option class="material-icons size-icons color_orange" value="color_orange">radio_button_checked</option>
+                        <option class="material-icons size-icons color_yellow" value="color_yellow">radio_button_checked</option>
+                        <option class="material-icons size-icons color_green" value="color_green">radio_button_checked</option>
+                        <option class="material-icons size-icons color_aqua" value="color_aqua">radio_button_checked</option>
+                        <option class="material-icons size-icons color_blue" value="color_blue">radio_button_checked</option>
+                        <option class="material-icons size-icons color_purple" value="color_purple">radio_button_checked</option>
                     </select>
-                    <input class="sidebar__create_new_feed-group" type="text" placeholder="Новая лента">
+                    <input class="sidebar__create_new_feed-group" type="text" placeholder="Новая лента" ng-model="groupName" ng-keyup="$event.keyCode == 13 && addNewGroup()">
                 </form>
             </div>
             <div class="wrap_content">
                 <input class="content__search" type="search" placeholder="Поиск по новостям...">
                 <div class="content">
                     <div class="content__list">
-                        <div class="article-link">
-                            <h1 class="article-link__title">Хабра</h1>
-                            <p class="article-link__url">http:habrahabr.ru/rss</p>
-                            <i class="material-icons article-link__edit-icon">edit</i>
-                            <i class="material-icons article-link__delete-icon">delete</i>
-                            <i class="material-icons article-link__navigate-next-icon">navigate_next</i>
-                        </div>
-                        <div class="article-link">
-                            <h1 class="article-link__title">Хабра</h1>
-                            <p class="article-link__url">http:habrahabr.ru/rss</p>
-                            <i class="material-icons article-link__edit-icon">edit</i>
-                            <i class="material-icons article-link__delete-icon">delete</i>
-                            <i class="material-icons article-link__navigate-next-icon">navigate_next</i>
-                        </div>
-                        <div class="article-link">
-                            <h1 class="article-link__title">Хабра</h1>
-                            <p class="article-link__url">http:habrahabr.ru/rss</p>
-                            <i class="material-icons article-link__edit-icon">edit</i>
-                            <i class="material-icons article-link__delete-icon">delete</i>
-                            <i class="material-icons article-link__navigate-next-icon">navigate_next</i>
-                        </div>
-                        <div class="article-link">
-                            <h1 class="article-link__title">Хабра</h1>
-                            <p class="article-link__url">http:habrahabr.ru/rss</p>
-                            <i class="material-icons article-link__edit-icon">edit</i>
-                            <i class="material-icons article-link__delete-icon">delete</i>
+                        <div class="article-link" ng-repeat="link in data.groups[indexGroup].article_links">
+                            <h1 class="article-link__title">{{link.name}}</h1>
+                            <p class="article-link__url">{{link.url}}</p>
+                            <i class="material-icons article-link__edit-icon" ng-click="editLink($index, name, url)">edit</i>
+                            <i class="material-icons article-link__delete-icon" ng-click="deleteLink()">delete</i>
                             <i class="material-icons article-link__navigate-next-icon">navigate_next</i>
                         </div>
                     </div>
@@ -117,6 +90,44 @@
                             <p class="article__data">03.11.2018 в 9:00</p>
                             <button class="article__button">Читать описание</button>
                             <div class="article__line"></div>
+                        </div>
+                    </div>
+                    <div class="wrapper__form_adding_new_feed"></div>
+                    <!--Форма для добавления ссылки на статью-->
+                    <div class="form_adding_new_feed">
+                        <div class="form_adding_new_feed__title">Добавление новой ленты</div>
+                        <!--Форма для добавления ссылки на статью-->
+                        <div class="form_adding_new_feed__body">
+                            <div class="form_adding_new_feed_form_name">Название ленты</div>
+                            <input class="form_adding_new_feed__form_input" type="text" placeholder="Название ленты" ng-model="linkName">
+                            <div class="form_adding_new_feed_form_url">URL</div>
+                            <input class="form_adding_new_feed__form_input" type="text" placeholder="URL" ng-model="linkUrl">
+                            <div class="form_adding_new_feed_form_name">Группа</div>
+                            <select class="form-control form_adding_new_feed__form_input" type="text" ng-model="indexGroup_for_addNewLink">
+                                <option ng-value="this.$index" ng-repeat="group in data.groups">{{group.name}}</option>
+                            </select>
+                        </div>
+                        <div class="form_adding_new_feed__buttons">
+                            <a class="btn form_adding_new_feed__cancel" href="#">Отменить</a>
+                            <a class="btn form_adding_new_feed__add" href="#" ng-click="addNewLink()">Добавить</a>
+                        </div>
+                    </div>
+                    <!--Форма для редактирования ссылки на статью-->
+                    <div class="form_editing_feed">
+                        <div class="form_adding_new_feed__title">Добавление новой ленты</div>
+                        <div class="form_adding_new_feed__body">
+                            <div class="form_adding_new_feed_form_name">Название ленты</div>
+                            <input class="form_adding_new_feed__form_input" type="text" placeholder="Название ленты" ng-model="linkName">
+                            <div class="form_adding_new_feed_form_url">URL</div>
+                            <input class="form_adding_new_feed__form_input" type="text" placeholder="URL" ng-model="linkUrl">
+                            <div class="form_adding_new_feed_form_name">Группа</div>
+                            <select class="form-control form_adding_new_feed__form_input" type="text" ng-init="">
+                                <option ng-repeat="group in data.groups">{{group.name}}</option>
+                            </select>
+                        </div>
+                        <div class="form_adding_new_feed__buttons">
+                            <a class="btn form_adding_new_feed__cancel" href="#">Отменить</a>
+                            <a class="btn form_editing_feed__edit" href="#" ng-click="edit()">Добавить</a>
                         </div>
                     </div>
                 </div>
