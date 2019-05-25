@@ -384,9 +384,12 @@ html, body {
     float: right;
 }
 
-.article__text {
+.article__block_with_text {
     margin-bottom: 5px;
-    font-size: 13px;
+}
+
+.article__text {
+    font-size: 14px;
     font-family: "Open Sans", sans-serif;
 }
 
