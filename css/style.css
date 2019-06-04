@@ -56,27 +56,37 @@ html, body {
     flex-shrink: 0;
 }
 
-.sidebar__list-feed-group {
+.sidebar__list_feed_group {
     margin-bottom: 20px;
     overflow-y: auto;
 }
 
-.sidebar__list-feed-group::-webkit-scrollbar-track
+.sidebar__list_feed_group::-webkit-scrollbar-track
 {
     background-color: #2b2e35;
     border-radius: 6px;
 }
 
-.sidebar__list-feed-group::-webkit-scrollbar
+.sidebar__list_feed_group::-webkit-scrollbar
 {
     width: 12px;
     background-color: #1d2027;
 }
 
-.sidebar__list-feed-group::-webkit-scrollbar-thumb
+.sidebar__list_feed_group::-webkit-scrollbar-thumb
 {
     background-color: #464a54;
     border-radius: 6px;
+}
+
+.sidebar__list_none {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 38px;
+    color: #eeeeee;
+    font-size: 13px;
+    font-family: "Open Sans", sans-serif;
 }
 
 .sidebar__feed-group {
@@ -88,7 +98,7 @@ html, body {
 }
 
 .sidebar__feed-group:hover {
-    background-color: #2b2e35;
+    background-color: #464a54;
 }
 
 .sidebar__feed-group:hover .feed-group__delete-icon {
@@ -248,6 +258,16 @@ html, body {
 
 }
 
+.article-link__list_none {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 95px;
+    color: #1f7ca3;
+    font-size: 14px;
+    font-family: "Open Sans", sans-serif;
+}
+
 .article-link {
     flex-shrink: 0;
     position: relative;
@@ -396,7 +416,7 @@ html, body {
 .article__read-next {
     color: #428bd3;
     margin-bottom: 25px;
-    font-size: 13px;
+    font-size: 14px;
     font-family: "Open Sans", sans-serif;
     line-height: 12px;
     cursor: pointer;
@@ -420,7 +440,6 @@ html, body {
     left: 0;
     background-color: #000000;
     opacity: 0.5;
-    visibility: hidden;
 }
 
 .form_adding_new_feed, .form_editing_feed {
@@ -432,7 +451,6 @@ html, body {
     padding: 17px 0 35px;
     background-color: #ffffff;
     border-radius: 3px;
-    visibility: hidden;
 }
 
 .visibility {
@@ -500,7 +518,7 @@ html, body {
     justify-content: center;
     align-items: center;
     margin-right: 9px;
-    width: 93px;
+    width: 110px;
     height: 34px;
     font-family: "Open Sans", sans-serif;
     font-size: 13px;
@@ -515,7 +533,7 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 89px;
+    width: 110px;
     height: 34px;
     font-family: "Open Sans", sans-serif;
     font-size: 13px;
