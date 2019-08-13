@@ -7,194 +7,178 @@
 var model = {
     groups: [
         {
-            name: "Програмирование",
-            class_color: "color_purple",
-            article_feeds: [
-                {name: "Хабра", url: "http://habrahabr.ru/rss"},
-                {name: "Хабра 2", url: "http://habrahabr.ru/rss"},
-                {name: "Хабра 3", url: "http://habrahabr.ru/rss"}]
+            name: 'Програмирование',
+            colorId: '7',
+            feeds: [
+                {name: 'Хабра', url: 'http://habrahabr.ru/rss'},
+                {name: 'Хабра 2', url: 'http://habrahabr.ru/rss'},
+                {name: 'Хабра 3', url: 'http://habrahabr.ru/rss'}]
         },
 
         {
-            name: "Дизайн",
-            class_color: "color_blue",
-            article_feeds: [
-                {name: "Дизай", url: "дизайн.рф"}]
+            name: 'Дизайн',
+            colorId: '6',
+            feeds: [
+                {name: 'Дизай', url: 'дизайн.рф'}]
         },
 
         {
-            name: "Смешнявки",
-            class_color: "color_red",
-            article_feeds: [
-                {name: "Пикабу", url: "Пикабу.рф"}]
+            name: 'Смешнявки',
+            colorId: '1',
+            feeds: [
+                {name: 'Пикабу', url: 'Пикабу.рф'}]
         }],
 
-    color_markers: [
-        {
-            id: 0,
-            className: 'color_red'
-        },
-
+    colorMarkers: [
         {
             id: 1,
-            className: 'color_orange'
+            className: 'color-red'
         },
 
         {
             id: 2,
-            className: 'color_yellow'
+            className: 'color-orange'
         },
 
         {
             id: 3,
-            className: 'color_green'
+            className: 'color-yellow'
         },
 
         {
             id: 4,
-            className: 'color_aqua'
+            className: 'color-green'
         },
 
         {
             id: 5,
-            className: 'color_blue'
+            className: 'color-aqua'
         },
 
         {
             id: 6,
-            className: 'color_purple'
+            className: 'color-blue'
+        },
+
+        {
+            id: 7,
+            className: 'color-purple'
         }
     ]
 };
 
 //Модуль
-var rssReader = angular.module("rssReaderApp", []);
+var rssReader = angular.module('rssReaderApp', []);
 
 //Контроллер
-rssReader.controller("rssReaderCtrl", function ($scope) {
+rssReader.controller('rssReaderCtrl', function ($scope) {
     $scope.data = model;
-    $scope.indexGroup = 0;
 
-    //addNewGroup
-    $scope.groupName = "";
-    $scope.id_color_value = "0";
+    $scope.Group = {
+        colorId: '1',
+        feeds: []
+    };
 
-    //addNewFeed
-    $scope.feedName = "";
-    $scope.feedUrl = "";
+    $scope.Feed = {
+        name: '',
+        url: ''
+    };
 
-    //editFeed
-    $scope.feedName = "";
-    $scope.feedUrl = "";
+    $scope.selectGroupIndex = 0;
+    $scope.selectPopupGroupIndex = $scope.selectGroupIndex;
 
-    $scope.colorID = "0";
+    $scope.addFeedPopupVisible = false;
+    $scope.editFeedPopupVisible = false;
 
-    $scope.showFormAddFeed = false;
-    $scope.showFormEditFeed = false;
-
-    $scope.validError__feedName = false;
-    $scope.validError__feedUrl = false;
+    $scope.feedNameEnabled = false;
+    $scope.feedUrlEnabled = false;
 
     $scope.selectGroup = function () {
-        $scope.indexGroup = this.$index;
+        $scope.selectGroupIndex = this.$index;
     };
 
-    $scope.colorsMarkers__searchColor = function (id) {
-        id = Number(id);
-        return $scope.data.color_markers.filter(color_marker => color_marker['id'] === id)[0]['className'];
+    $scope.searchColorClass = function (id) {
+        id = parseInt(id);
+        return ($scope.data.colorMarkers.filter(function (colorMarker) {return colorMarker['id'] === id})[0]['className']);
     };
 
-    $scope.validFormGroup = function () {
+    $scope.validateFormGroup = function () {
         if ($scope.newGroupForm.newGroupForm__name.$valid) {
             $scope.addNewGroup();
-        }
+        };
+    };
+
+    $scope.showAddFeedPopup = function () {
+        $scope.selectPopupGroupIndex = $scope.selectGroupIndex;
+        $scope.addFeedPopupVisible = true;
+        $scope.Feed = {};
     };
 
     $scope.addNewGroup = function () {
-        $scope.data.groups.push({
-            name: $scope.groupName,
-            class_color: $scope.colorsMarkers__searchColor($scope.colorID),
-            article_feeds: [],
-        });
-
-        $scope.groupName = "";
-        $scope.colorID = "0";
+        $scope.data.groups.push(Object.assign($scope.Group));
+        $scope.Group = {
+            colorId: '1',
+            feeds: []
+        };
     };
 
     $scope.confirmDeleteGroup = function () {
-        if ($scope.data.groups[this.$index].article_feeds.length == 0) {
-            $scope.deleteGroup(this);
-        } else {
-            if (confirm("В данной группе находится " +$scope.data.groups[this.$index].article_feeds.length+ " лент(а/ы). Вы уверены, что хотите удалить её?")) {
-                $scope.deleteGroup(this);
-            };
+        $scope.feedCount = $scope.data.groups[this.$index].feeds.length;
+        $scope.confirmMessage = 'В данной группе находится ' +$scope.feedCount+ ' лент(а/ы). Вы уверены, что хотите удалить её?';
+        if ($scope.feedCount === 0 || confirm($scope.confirmMessage)) {
+            $scope.data.groups.splice(this.$index, 1);
         };
     };
 
-    $scope.deleteGroup = function (this_group) {
-        $scope.data.groups.splice(this_group.$index, 1);
-    };
-
-    $scope.validFormFeed = function () {
+    $scope.validateFormFeed = function () {
         if ($scope.feedForm.$valid) {
-            if ($scope.showFormAddFeed) {
-                $scope.addNewFeed();
-                $scope.showFormAddFeed = false;
+            if ($scope.addFeedPopupVisible) {
+                $scope.addNewFeed($scope.selectGroupIndex);
+                $scope.addFeedPopupVisible = false;
 
-                $scope.validError__feedName = false;
-                $scope.validError__feedUrl = false;
+                $scope.feedNameEnabled = false;
+                $scope.feedUrlEnabled = false;
 
-            } else if ($scope.showFormEditFeed) {
+            } else if ($scope.editFeedPopupVisible) {
                 $scope.editFeed();
-                $scope.showFormEditFeed = false;
+                $scope.editFeedPopupVisible = false;
 
-                $scope.validError__feedName = false;
-                $scope.validError__feedUrl = false;
+                $scope.feedNameEnabled = false;
+                $scope.feedUrlEnabled = false;
             }
         } else {
-            $scope.validError__feedName = $scope.feedForm.feedForm__name.$error.required;
-            $scope.validError__feedUrl = $scope.feedForm.feedForm__url.$error;
+            $scope.feedNameEnabled = $scope.feedForm.feedForm__name.$error.required;
+            $scope.feedUrlEnabled = $scope.feedForm.feedForm__url.$error;
         };
     };
 
-    $scope.addNewFeed = function () {
-        $scope.data.groups[$scope.indexGroup].article_feeds.push({
-            name: $scope.feedName,
-            url: $scope.feedUrl,
-        });
-
-        $scope.feedName = "";
-        $scope.feedUrl = "";
-    };
-
-    $scope.deleteFeed = function (indexGroup, indexFeed) {
-            $scope.data.groups[indexGroup].article_feeds.splice(indexFeed, 1);
+    $scope.addNewFeed = function (index) {
+        $scope.data.groups[index].feeds.push(Object.assign($scope.Feed));
+        $scope.Feed = {};
     };
 
     $scope.confirmDeleteFeed = function () {
-        if (confirm("Вы уверены, что хотите удалить данную ленту?")) {
-            $scope.deleteFeed($scope.indexGroup, this.$index);
+        $scope.confirmMessage = 'Вы уверены, что хотите удалить данную ленту?';
+        if (confirm($scope.confirmMessage)) {
+            $scope.data.groups[$scope.selectGroupIndex].feeds.splice(this.$index, 1);
         };
     };
 
+    $scope.showEditFeedPopup = function () {
+        $scope.editFeedIndex = this.$index;
+        $scope.editFeedPopupVisible = true;
 
-    $scope.showFormEditing = function () {
-        $scope.indexGroupForFeed  = $scope.indexGroup;
-        $scope.indexEditFeed = this.$index;
-        $scope.feedName = $scope.data.groups[$scope.indexGroup].article_feeds[this.$index].name;
-        $scope.feedUrl = $scope.data.groups[$scope.indexGroup].article_feeds[this.$index].url;
-        $scope.showFormEditFeed = true;
+        Object.assign($scope.Feed, $scope.data.groups[$scope.selectGroupIndex].feeds[$scope.editFeedIndex]);
     };
 
     $scope.editFeed = function () {
-        if ($scope.indexGroupForFeed == $scope.indexGroup) {
-            $scope.data.groups[$scope.indexGroup].article_feeds[$scope.indexEditFeed] = {name: $scope.feedName, url: $scope.feedUrl};
+        if ($scope.selectPopupGroupIndex === $scope.selectGroupIndex) {
+            $scope.data.groups[$scope.selectGroupIndex].feeds[$scope.editFeedIndex] = {};
+            Object.assign($scope.data.groups[$scope.selectGroupIndex].feeds[$scope.editFeedIndex], $scope.Feed);
         } else {
-            $scope.deleteFeed($scope.indexGroupForFeed, $scope.indexEditFeed);
-            $scope.addNewFeed();
-        };
-
-        $scope.feedName = "";
-        $scope.feedUrl = "";
+            $scope.data.groups[$scope.selectGroupIndex].feeds.splice($scope.editFeedIndex, 1);
+            console.log($scope.data.groups);
+            $scope.addNewFeed($scope.selectPopupGroupIndex);
+        }
     };
 });

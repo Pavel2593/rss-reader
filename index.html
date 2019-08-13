@@ -13,43 +13,43 @@
         <div class="page">
             <div class="sidebar">
                 <div class="sidebar__logo"></div>
-                <a class="sidebar__btn" href="#" ng-click="showFormAddFeed = true; feedName = ''; feedUrl=''" >Добавить ленту</a>
+                <a class="sidebar__btn" href="#" ng-click="showAddFeedPopup()" >Добавить ленту</a>
                 <div class="sidebar__line"></div>
                 <div class="sidebar__list_feed_group">
                     <div class="sidebar__list_none" ng-show="data.groups.length === 0">Список пуст</div>
-                    <div class="sidebar__feed-group" ng-style="$index === indexGroup && {'background-color': '#2b2e35'}" ng-repeat="group in data.groups" ng-click="selectGroup ()">
-                        <i class="material-icons size-icons feed-group__margin-icon" ng-class="group.class_color">radio_button_checked</i>
-                        <div class="feed-group__title">{{group.name}} ({{group.article_feeds.length}})</div>
+                    <div class="sidebar__feed-group" ng-style="$index == selectGroupIndex && {'background-color': '#2b2e35'}" ng-repeat="group in data.groups" ng-click="selectGroup()">
+                        <i class="material-icons size-icons feed-group__margin-icon" ng-class="searchColorClass(group.colorId)">radio_button_checked</i>
+                        <div class="feed-group__title">{{group.name}} ({{group.feeds.length}})</div>
                         <i class="material-icons feed-group__delete-icon" ng-click="confirmDeleteGroup()">delete</i>
                     </div>
                 </div>
                 <form class="sidebar__form" name="newGroupForm">
-                    <select class="material-icons sidebar__select" ng-model="colorID" ng_class="colorsMarkers__searchColor(colorID)">
-                        <option class="material-icons size-icons color_red" value="0">radio_button_checked</option>
-                        <option class="material-icons size-icons color_orange" value="1">radio_button_checked</option>
-                        <option class="material-icons size-icons color_yellow" value="2">radio_button_checked</option>
-                        <option class="material-icons size-icons color_green" value="3">radio_button_checked</option>
-                        <option class="material-icons size-icons color_aqua" value="4">radio_button_checked</option>
-                        <option class="material-icons size-icons color_blue" value="5">radio_button_checked</option>
-                        <option class="material-icons size-icons color_purple" value="6">radio_button_checked</option>
+                    <select class="material-icons sidebar__select" ng-model="Group['colorId']" ng_class="searchColorClass(Group['colorId'])">
+                        <option class="material-icons size-icons color-red" value="1">radio_button_checked</option>
+                        <option class="material-icons size-icons color-orange" value="2">radio_button_checked</option>
+                        <option class="material-icons size-icons color-yellow" value="3">radio_button_checked</option>
+                        <option class="material-icons size-icons color-green" value="4">radio_button_checked</option>
+                        <option class="material-icons size-icons color-aqua" value="5">radio_button_checked</option>
+                        <option class="material-icons size-icons color-blue" value="6">radio_button_checked</option>
+                        <option class="material-icons size-icons color-purple" value="7">radio_button_checked</option>
                     </select>
-                    <input class="sidebar__create_new_feed-group" name="newGroupForm__name" type="text" placeholder="Новая лента" ng-model="groupName" ng-keyup="$event.keyCode == 13 && validFormGroup()" required>
+                    <input class="sidebar__create-group" name="newGroupForm__name" type="text" placeholder="Новая лента" ng-model="Group['name']" ng-keyup="$event.keyCode == 13 && validateFormGroup()" required>
                 </form>
             </div>
             <div class="wrap_content">
                 <input class="content__search" type="search" placeholder="Поиск по новостям...">
                 <div class="content">
-                    <div class="content__list">
-                        <div class="article-link__list_none" ng-show="data.groups[indexGroup].article_feeds.length === 0">Список пуст</div>
-                        <div class="article-link" ng-repeat="link in data.groups[indexGroup].article_feeds">
-                            <h1 class="article-link__title">{{link.name}}</h1>
-                            <p class="article-link__url">{{link.url}}</p>
-                            <i class="material-icons article-link__edit-icon" ng-click="showFormEditing()">edit</i>
-                            <i class="material-icons article-link__delete-icon" ng-click="confirmDeleteFeed()">delete</i>
-                            <i class="material-icons article-link__navigate-next-icon">navigate_next</i>
+                    <div class="feed-list">
+                        <div class="feed-list__list-none" ng-show="data.groups[selectGroupIndex].feeds.length === 0">Список пуст</div>
+                        <div class="feed-list__feed-container" ng-repeat="link in data.groups[selectGroupIndex].feeds">
+                            <h1 class="feed-list__feed-name">{{link.name}}</h1>
+                            <p class="feed-list__feed-url">{{link.url}}</p>
+                            <i class="material-icons feed-list__edit-icon" ng-click="showEditFeedPopup()">edit</i>
+                            <i class="material-icons feed-list__delete-icon" ng-click="confirmDeleteFeed()">delete</i>
+                            <i class="material-icons feed-list__navigate-next-icon">navigate_next</i>
                         </div>
                     </div>
-                    <div class="content__article">
+                    <div class="article">
                         <div>
                             <h1 class="article__title" href="#">Планы выхода контента.</h1>
                             <p class="article__read-status">прочитано</p>
@@ -91,37 +91,37 @@
                         </div>
                     </div>
                     <!--Форма для добавления или редактирование ленты-->
-                    <div class="wrapper__form_adding_new_feed" ng-show="showFormAddFeed || showFormEditFeed" ng-click="showFormAddFeed = false; showFormEditFeed = false; validError__feedName = false; validError__feedUrl = false"></div>
-                    <form class="form_adding_new_feed" name="feedForm" ng-show="showFormAddFeed || showFormEditFeed">
-                        <div class="form_adding_new_feed__title" ng-show="showFormAddFeed">Добавление новой ленты</div>
-                        <div class="form_adding_new_feed__title" ng-show="showFormEditFeed">Редактирование ленты</div>
+                    <div class="wrap-popup" ng-show="addFeedPopupVisible || editFeedPopupVisible" ng-click="addFeedPopupVisible = false; editFeedPopupVisible = false; feedNameEnabled = false; feedUrlEnabled = false;;"></div>
+                    <form class="popup" name="feedForm" ng-show="addFeedPopupVisible || editFeedPopupVisible">
+                        <div class="popup__title" ng-show="addFeedPopupVisible">Добавление новой ленты</div>
+                        <div class="popup__title" ng-show="editFeedPopupVisible">Редактирование ленты</div>
                         <div class="form_adding_new_feed__body">
-                            <div class="form_adding_new_feed_form_name">Название ленты</div>
-                            <div class="form_adding_new_feed_form__form">
-                                <input class="form_adding_new_feed__form_input" ng-style="validError__feedName && {'border-color': '#df4b41'}" name="feedForm__name" type="text" placeholder="Название ленты" ng-model="feedName" required>
-                                <div class="form_adding_new_feed__error" ng-show="validError__feedName">Введите название ленты</div>
+                            <div class="popup__form-name">Название ленты</div>
+                            <div class="popup__wrap-input">
+                                <input class="popup__input" name="feedForm__name" type="text" placeholder="Название ленты" ng-style="feedNameEnabled && {'border-color': '#df4b41'}" ng-model="Feed['name']" required>
+                                <div class="popup__input-error" ng-show="feedNameEnabled">Введите название ленты</div>
                             </div>
-                            <div class="form_adding_new_feed_form_url" >URL</div>
-                            <div class="form_adding_new_feed_form__form">
-                                <input class="form_adding_new_feed__form_input" ng-style="validError__feedUrl && {'border-color': '#df4b41'}" name="feedForm__url" type="url" placeholder="URL" ng-model="feedUrl" required>
-                                <div class="form_adding_new_feed__error" ng-show="validError__feedUrl">URL не верный</div>
+                            <div class="popup__form-name" >URL</div>
+                            <div class="popup__wrap-input">
+                                <input class="popup__input" name="feedForm__url" type="url" placeholder="URL" ng-style="feedUrlEnabled && {'border-color': '#df4b41'}" ng-model="Feed['url']" required>
+                                <div class="popup__input-error" ng-show="feedUrlEnabled">URL не верный</div>
                             </div>
-                            <div class="form_adding_new_feed_form_name">Группа</div>
-                            <select class="form_adding_new_feed__form_input" type="url" ng-model="indexGroup">
+                            <div class="popup__form-name">Группа</div>
+                            <select class="popup__input" type="url" ng-model="selectPopupGroupIndex">
                                 <option ng-value="this.$index" ng-repeat="group in data.groups">{{group.name}}</option>
                             </select>
                         </div>
                         <div class="form_adding_new_feed__buttons">
-                            <a class="btn form_adding_new_feed__cancel" href="#" ng-click="showFormAddFeed = false; showFormEditFeed = false; validError__feedName = false; validError__feedUrl = false">Отменить</a>
-                            <a class="btn form_adding_new_feed__button" href="#" ng-show="showFormAddFeed" ng-click="validFormFeed()">Добавить</a>
-                            <a class="btn form_adding_new_feed__button" href="#" ng-show="showFormEditFeed" ng-click="validFormFeed()">Редактировать</a>
+                            <a class="btn popup__cancel-button" href="#" ng-click="addFeedPopupVisible = false; editFeedPopupVisible = false; feedNameEnabled = false; feedUrlEnabled = false">Отменить</a>
+                            <a class="btn popup__add-button" href="#" ng-show="addFeedPopupVisible" ng-click="validateFormFeed()">Добавить</a>
+                            <a class="btn popup__edit-button" href="#" ng-show="editFeedPopupVisible" ng-click="validateFormFeed()">Редактировать</a>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
         <script src="js/libs/jquery-3.3.1.min.js"></script>
-        <script src="js/libs/angular.js"></script>
+        <script src="js/libs/angular-1.7.8.js"></script>
         <script src="js/app.js"></script>
     </body>
 </html>
