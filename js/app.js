@@ -177,7 +177,6 @@ rssReader.controller('rssReaderCtrl', function ($scope) {
             Object.assign($scope.data.groups[$scope.selectGroupIndex].feeds[$scope.editFeedIndex], $scope.Feed);
         } else {
             $scope.data.groups[$scope.selectGroupIndex].feeds.splice($scope.editFeedIndex, 1);
-            console.log($scope.data.groups);
             $scope.addNewFeed($scope.selectPopupGroupIndex);
         }
     };
