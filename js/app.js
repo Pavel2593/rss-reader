@@ -84,8 +84,8 @@ rssReader.controller('rssReaderCtrl', function ($scope) {
     $scope.selectGroupIndex = 0;
     $scope.selectPopupGroupIndex = $scope.selectGroupIndex;
 
-    $scope.addFeedPopupVisible = false;
-    $scope.editFeedPopupVisible = false;
+    $scope.addFeedPopupVisibleEnabled = false;
+    $scope.editFeedPopupVisibleEnabled = false;
 
     $scope.feedNameEnabled = false;
     $scope.feedUrlEnabled = false;
@@ -107,7 +107,7 @@ rssReader.controller('rssReaderCtrl', function ($scope) {
 
     $scope.showAddFeedPopup = function () {
         $scope.selectPopupGroupIndex = $scope.selectGroupIndex;
-        $scope.addFeedPopupVisible = true;
+        $scope.addFeedPopupVisibleEnabled = true;
         $scope.Feed = {
             url: ''
         };
@@ -131,16 +131,16 @@ rssReader.controller('rssReaderCtrl', function ($scope) {
 
     $scope.validateFormFeed = function () {
         if ($scope.feedForm.$valid) {
-            if ($scope.addFeedPopupVisible) {
+            if ($scope.addFeedPopupVisibleEnabled) {
                 $scope.addNewFeed($scope.selectGroupIndex);
-                $scope.addFeedPopupVisible = false;
+                $scope.addFeedPopupVisibleEnabled = false;
 
                 $scope.feedNameEnabled = false;
                 $scope.feedUrlEnabled = false;
 
-            } else if ($scope.editFeedPopupVisible) {
+            } else if ($scope.editFeedPopupVisibleEnabled) {
                 $scope.editFeed();
-                $scope.editFeedPopupVisible = false;
+                $scope.editFeedPopupVisibleEnabled = false;
 
                 $scope.feedNameEnabled = false;
                 $scope.feedUrlEnabled = false;
@@ -165,7 +165,7 @@ rssReader.controller('rssReaderCtrl', function ($scope) {
 
     $scope.showEditFeedPopup = function () {
         $scope.editFeedIndex = this.$index;
-        $scope.editFeedPopupVisible = true;
+        $scope.editFeedPopupVisibleEnabled = true;
 
         Object.assign($scope.Feed, $scope.data.groups[$scope.selectGroupIndex].feeds[$scope.editFeedIndex]);
     };

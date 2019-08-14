@@ -15,8 +15,8 @@
                 <div class="sidebar__logo"></div>
                 <a class="sidebar__btn" href="#" ng-click="showAddFeedPopup()" >Добавить ленту</a>
                 <div class="sidebar__line"></div>
-                <div class="sidebar__list_feed_group">
-                    <div class="sidebar__list_none" ng-show="data.groups.length === 0">Список пуст</div>
+                <div class="sidebar__list-feed-groups">
+                    <div class="sidebar__list-none" ng-show="data.groups.length === 0">Список пуст</div>
                     <div class="sidebar__feed-group" ng-style="$index == selectGroupIndex && {'background-color': '#464a54'}" ng-repeat="group in data.groups" ng-click="selectGroup()">
                         <i class="material-icons size-icons feed-group__margin-icon" ng-class="searchColorClass(group.colorId)">radio_button_checked</i>
                         <div class="feed-group__title">{{group.name}} ({{group.feeds.length}})</div>
@@ -91,10 +91,10 @@
                         </div>
                     </div>
                     <!--Форма для добавления или редактирование ленты-->
-                    <div class="wrap-popup" ng-show="addFeedPopupVisible || editFeedPopupVisible" ng-click="addFeedPopupVisible = false; editFeedPopupVisible = false; feedNameEnabled = false; feedUrlEnabled = false"></div>
-                    <form class="popup" name="feedForm" ng-show="addFeedPopupVisible || editFeedPopupVisible">
-                        <div class="popup__title" ng-show="addFeedPopupVisible">Добавление новой ленты</div>
-                        <div class="popup__title" ng-show="editFeedPopupVisible">Редактирование ленты</div>
+                    <div class="wrap-popup" ng-show="addFeedPopupVisibleEnabled || editFeedPopupVisibleEnabled" ng-click="addFeedPopupVisibleEnabled = false; editFeedPopupVisibleEnabled = false; feedNameEnabled = false; feedUrlEnabled = false"></div>
+                    <form class="popup" name="feedForm" ng-show="addFeedPopupVisibleEnabled || editFeedPopupVisibleEnabled">
+                        <div class="popup__title" ng-show="addFeedPopupVisibleEnabled">Добавление новой ленты</div>
+                        <div class="popup__title" ng-show="editFeedPopupVisibleEnabled">Редактирование ленты</div>
                         <div class="form_adding_new_feed__body">
                             <div class="popup__form-name">Название ленты</div>
                             <div class="popup__wrap-input">
@@ -112,9 +112,9 @@
                             </select>
                         </div>
                         <div class="form_adding_new_feed__buttons">
-                            <a class="btn popup__cancel-button" href="#" ng-click="addFeedPopupVisible = false; editFeedPopupVisible = false; feedNameEnabled = false; feedUrlEnabled = false">Отменить</a>
-                            <a class="btn popup__add-button" href="#" ng-show="addFeedPopupVisible" ng-click="validateFormFeed()">Добавить</a>
-                            <a class="btn popup__edit-button" href="#" ng-show="editFeedPopupVisible" ng-click="validateFormFeed()">Редактировать</a>
+                            <a class="btn popup__cancel-button" href="#" ng-click="addFeedPopupVisibleEnabled = false; editFeedPopupVisibleEnabled = false; feedNameEnabled = false; feedUrlEnabled = false">Отменить</a>
+                            <a class="btn popup__add-button" href="#" ng-show="addFeedPopupVisibleEnabled" ng-click="validateFormFeed()">Добавить</a>
+                            <a class="btn popup__edit-button" href="#" ng-show="editFeedPopupVisibleEnabled" ng-click="validateFormFeed()">Редактировать</a>
                         </div>
                     </form>
                 </div>
