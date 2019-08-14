@@ -79,10 +79,7 @@ rssReader.controller('rssReaderCtrl', function ($scope) {
         feeds: []
     };
 
-    $scope.Feed = {
-        name: '',
-        url: ''
-    };
+    $scope.Feed = {};
 
     $scope.selectGroupIndex = 0;
     $scope.selectPopupGroupIndex = $scope.selectGroupIndex;
@@ -111,7 +108,9 @@ rssReader.controller('rssReaderCtrl', function ($scope) {
     $scope.showAddFeedPopup = function () {
         $scope.selectPopupGroupIndex = $scope.selectGroupIndex;
         $scope.addFeedPopupVisible = true;
-        $scope.Feed = {};
+        $scope.Feed = {
+            url: ''
+        };
     };
 
     $scope.addNewGroup = function () {

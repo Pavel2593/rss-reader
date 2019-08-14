@@ -98,7 +98,7 @@ html, body {
 }
 
 .sidebar__feed-group:hover {
-    background-color: #464a54;
+    background-color: #30333a;
 }
 
 .sidebar__feed-group:hover .feed-group__delete-icon {

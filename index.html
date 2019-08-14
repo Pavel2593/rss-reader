@@ -17,7 +17,7 @@
                 <div class="sidebar__line"></div>
                 <div class="sidebar__list_feed_group">
                     <div class="sidebar__list_none" ng-show="data.groups.length === 0">Список пуст</div>
-                    <div class="sidebar__feed-group" ng-style="$index == selectGroupIndex && {'background-color': '#2b2e35'}" ng-repeat="group in data.groups" ng-click="selectGroup()">
+                    <div class="sidebar__feed-group" ng-style="$index == selectGroupIndex && {'background-color': '#464a54'}" ng-repeat="group in data.groups" ng-click="selectGroup()">
                         <i class="material-icons size-icons feed-group__margin-icon" ng-class="searchColorClass(group.colorId)">radio_button_checked</i>
                         <div class="feed-group__title">{{group.name}} ({{group.feeds.length}})</div>
                         <i class="material-icons feed-group__delete-icon" ng-click="confirmDeleteGroup()">delete</i>
@@ -91,7 +91,7 @@
                         </div>
                     </div>
                     <!--Форма для добавления или редактирование ленты-->
-                    <div class="wrap-popup" ng-show="addFeedPopupVisible || editFeedPopupVisible" ng-click="addFeedPopupVisible = false; editFeedPopupVisible = false; feedNameEnabled = false; feedUrlEnabled = false;;"></div>
+                    <div class="wrap-popup" ng-show="addFeedPopupVisible || editFeedPopupVisible" ng-click="addFeedPopupVisible = false; editFeedPopupVisible = false; feedNameEnabled = false; feedUrlEnabled = false"></div>
                     <form class="popup" name="feedForm" ng-show="addFeedPopupVisible || editFeedPopupVisible">
                         <div class="popup__title" ng-show="addFeedPopupVisible">Добавление новой ленты</div>
                         <div class="popup__title" ng-show="editFeedPopupVisible">Редактирование ленты</div>
