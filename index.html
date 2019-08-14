@@ -13,9 +13,9 @@
         <div class="page">
             <div class="sidebar">
                 <div class="sidebar__logo"></div>
-                <a class="sidebar__btn" href="#" ng-click="showAddFeedPopup()" >Добавить ленту</a>
-                <div class="sidebar__line"></div>
-                <div class="sidebar__list-feed-groups">
+                <a class="sidebar__add-feed-button" href="#" ng-click="showAddFeedPopup()" >Добавить ленту</a>
+                <div class="sidebar__divider"></div>
+                <div class="sidebar__feed-group-list">
                     <div class="sidebar__list-none" ng-show="data.groups.length === 0">Список пуст</div>
                     <div class="sidebar__feed-group" ng-style="$index == selectGroupIndex && {'background-color': '#464a54'}" ng-repeat="group in data.groups" ng-click="selectGroup()">
                         <i class="material-icons size-icons feed-group__margin-icon" ng-class="searchColorClass(group.colorId)">radio_button_checked</i>
