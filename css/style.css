@@ -199,7 +199,7 @@ html, body {
     outline: none;
 }
 
-.wrap_content {
+.wrap-content {
     background-color: #f0f1f5;
     padding-top: 14px;
     padding-left: 20px;
@@ -410,7 +410,7 @@ html, body {
     float: right;
 }
 
-.article__block_with_text {
+.article__block-with-text {
     margin-bottom: 5px;
 }
 
@@ -471,7 +471,7 @@ html, body {
     line-height: 24px;
 }
 
-.form_adding_new_feed__body {
+.popup__body {
     display: grid;
     grid-template-columns: 195px 362px;
     padding: 20px 20px 20px 21px;
@@ -516,12 +516,7 @@ html, body {
     border-color: #df4b41;
 }
 
-.form_adding_new_feed__select {
-    font-family: "Open Sans", sans-serif;
-    font-size: 13px
-}
-
-.form_adding_new_feed__buttons {
+.popup__buttons {
     display: flex;
     justify-content: flex-end;
     padding-top: 19px;

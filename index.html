@@ -36,7 +36,7 @@
                     <input class="sidebar__create-group" name="newGroupForm__name" type="text" placeholder="Новая лента" ng-model="Group['name']" ng-keyup="$event.keyCode == 13 && validateFormGroup()" required>
                 </form>
             </div>
-            <div class="wrap_content">
+            <div class="wrap-content">
                 <input class="content__search" type="search" placeholder="Поиск по новостям...">
                 <div class="content">
                     <div class="feed-list">
@@ -57,7 +57,7 @@
                             <button class="article__button">Читать описание</button>
                             <div>
                                 <img class="article__img" src="images/wow_logo.png">
-                                <div class="article__block_with_text">
+                                <div class="article__block-with-text">
                                     <p class="article__text">Хотя в начале будет использоваться версия 1.12, мы хотим открыть для игроков те приключения, которые они ждут. Что касается графика, то мы добавили четыре дополнительных этапа и собираемся со временем ввести представленный контент в игру.</p>
                                     <p class="article__text">1-й этап: Огненные Недра, Ониксия, Забытый Город, Каззак, Азурегос.</p>
                                     <p class="article__text">2-й этап: логово Крыла Тьмы, поля боя и PvP-награды, Зул'Гуруб.</p>
@@ -95,7 +95,7 @@
                     <form class="popup" name="feedForm" ng-show="addFeedPopupVisibleEnabled || editFeedPopupVisibleEnabled">
                         <div class="popup__title" ng-show="addFeedPopupVisibleEnabled">Добавление новой ленты</div>
                         <div class="popup__title" ng-show="editFeedPopupVisibleEnabled">Редактирование ленты</div>
-                        <div class="form_adding_new_feed__body">
+                        <div class="popup__body">
                             <div class="popup__form-name">Название ленты</div>
                             <div class="popup__wrap-input">
                                 <input class="popup__input" name="feedForm__name" type="text" placeholder="Название ленты" ng-style="feedNameEnabled && {'border-color': '#df4b41'}" ng-model="Feed['name']" required>
@@ -111,7 +111,7 @@
                                 <option ng-value="this.$index" ng-repeat="group in data.groups">{{group.name}}</option>
                             </select>
                         </div>
-                        <div class="form_adding_new_feed__buttons">
+                        <div class="popup__buttons">
                             <a class="btn popup__cancel-button" href="#" ng-click="addFeedPopupVisibleEnabled = false; editFeedPopupVisibleEnabled = false; feedNameEnabled = false; feedUrlEnabled = false">Отменить</a>
                             <a class="btn popup__add-button" href="#" ng-show="addFeedPopupVisibleEnabled" ng-click="validateFormFeed()">Добавить</a>
                             <a class="btn popup__edit-button" href="#" ng-show="editFeedPopupVisibleEnabled" ng-click="validateFormFeed()">Редактировать</a>
