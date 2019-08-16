@@ -15,37 +15,33 @@
                 <div class="sidebar__logo"></div>
                 <a class="sidebar__add-feed-button" href="#" ng-click="showAddFeedPopup()" >Добавить ленту</a>
                 <div class="sidebar__divider"></div>
-                <div class="sidebar__feed-group-list">
-                    <div class="sidebar__list-none" ng-show="data.groups.length === 0">Список пуст</div>
-                    <div class="sidebar__feed-group" ng-style="$index == selectGroupIndex && {'background-color': '#464a54'}" ng-repeat="group in data.groups" ng-click="selectGroup()">
-                        <i class="material-icons size-icons feed-group__margin-icon" ng-class="searchColorClass(group.colorId)">radio_button_checked</i>
-                        <div class="feed-group__title">{{group.name}} ({{group.feeds.length}})</div>
-                        <i class="material-icons feed-group__delete-icon" ng-click="confirmDeleteGroup()">delete</i>
+                <div class="sidebar__group-list">
+                    <div class="sidebar__empty-list" ng-show="data.groups.length === 0">Список пуст</div>
+                    <div class="sidebar__group" ng-class="{true: 'sidebar__select-background'}[$index === selectGroupIndex]" ng-repeat="group in data.groups" ng-click="selectGroup()">
+                        <i class="material-icons size-icons sidebar__group-margin-icon" ng-class="searchColorClass(group.colorId)">radio_button_checked</i>
+                        <div class="sidebar__group-title">{{group.name}} ({{group.feeds.length}})</div>
+                        <i class="material-icons sidebar__group-delete-icon" ng-click="confirmDeleteGroup()">delete</i>
                     </div>
                 </div>
-                <form class="sidebar__form" name="newGroupForm">
-                    <select class="material-icons sidebar__select" ng-model="Group['colorId']" ng_class="searchColorClass(Group['colorId'])">
-                        <option class="material-icons size-icons color-red" value="1">radio_button_checked</option>
-                        <option class="material-icons size-icons color-orange" value="2">radio_button_checked</option>
-                        <option class="material-icons size-icons color-yellow" value="3">radio_button_checked</option>
-                        <option class="material-icons size-icons color-green" value="4">radio_button_checked</option>
-                        <option class="material-icons size-icons color-aqua" value="5">radio_button_checked</option>
-                        <option class="material-icons size-icons color-blue" value="6">radio_button_checked</option>
-                        <option class="material-icons size-icons color-purple" value="7">radio_button_checked</option>
+                <form class="sidebar__form" name="groupForm">
+                    <select class="material-icons sidebar__select-color-marker" ng-model="group.colorId" ng-class="searchColorClass(group.colorId)">
+                        <option class="material-icons size-icons color-red" ng-repeat="colorMarker in data.colorMarkers" ng-class="colorMarker.className" ng-value="colorMarker.id">radio_button_checked</option>
                     </select>
-                    <input class="sidebar__create-group" name="newGroupForm__name" type="text" placeholder="Новая лента" ng-model="Group['name']" ng-keyup="$event.keyCode == 13 && validateFormGroup()" required>
+                    <input class="sidebar__create-group" name="groupFormName" type="text" placeholder="Новая лента" ng-model="group.name" ng-keyup="$event.keyCode == 13 && validateFormGroup()" required>
                 </form>
             </div>
-            <div class="wrap-content">
+            <div class="wrapper-content">
                 <input class="content__search" type="search" placeholder="Поиск по новостям...">
                 <div class="content">
                     <div class="feed-list">
-                        <div class="feed-list__list-none" ng-show="data.groups[selectGroupIndex].feeds.length === 0">Список пуст</div>
+                        <div class="feed-list__empty-list" ng-show="data.groups[selectGroupIndex].feeds.length === 0">Список пуст</div>
                         <div class="feed-list__feed-container" ng-repeat="link in data.groups[selectGroupIndex].feeds">
                             <h1 class="feed-list__feed-name">{{link.name}}</h1>
                             <p class="feed-list__feed-url">{{link.url}}</p>
-                            <i class="material-icons feed-list__edit-icon" ng-click="showEditFeedPopup()">edit</i>
-                            <i class="material-icons feed-list__delete-icon" ng-click="confirmDeleteFeed()">delete</i>
+                            <div class="feed-list__icon-container">
+                                <i class="material-icons feed-list__icon" ng-click="showEditFeedPopup()">edit</i>
+                                <i class="material-icons feed-list__icon" ng-click="confirmDeleteFeed()">delete</i>
+                            </div>
                             <i class="material-icons feed-list__navigate-next-icon">navigate_next</i>
                         </div>
                     </div>
@@ -57,7 +53,7 @@
                             <button class="article__button">Читать описание</button>
                             <div>
                                 <img class="article__img" src="images/wow_logo.png">
-                                <div class="article__block-with-text">
+                                <div class="article__text-block">
                                     <p class="article__text">Хотя в начале будет использоваться версия 1.12, мы хотим открыть для игроков те приключения, которые они ждут. Что касается графика, то мы добавили четыре дополнительных этапа и собираемся со временем ввести представленный контент в игру.</p>
                                     <p class="article__text">1-й этап: Огненные Недра, Ониксия, Забытый Город, Каззак, Азурегос.</p>
                                     <p class="article__text">2-й этап: логово Крыла Тьмы, поля боя и PvP-награды, Зул'Гуруб.</p>
@@ -68,42 +64,42 @@
                                 </div>
                                 <div class="article__read-next">Читать дальше→</div>
                             </div>
-                            <div class="article__line"></div>
+                            <div class="article__divider"></div>
                             <div class="clear"></div>
                         </div>
                         <div>
                             <h1 class="article__title">Планы выхода контента.</h1>
                             <p class="article__data">03.11.2018 в 9:00</p>
                             <button class="article__button">Читать описание</button>
-                            <div class="article__line"></div>
+                            <div class="article__divider"></div>
                         </div>
                         <div>
                             <h1 class="article__title">Планы выхода контента.</h1>
                             <p class="article__data">03.11.2018 в 9:00</p>
                             <button class="article__button">Читать описание</button>
-                            <div class="article__line"></div>
+                            <div class="article__divider"></div>
                         </div>
                         <div>
                             <h1 class="article__title">Планы выхода контента.</h1>
                             <p class="article__data">03.11.2018 в 9:00</p>
                             <button class="article__button">Читать описание</button>
-                            <div class="article__line"></div>
+                            <div class="article__divider"></div>
                         </div>
                     </div>
                     <!--Форма для добавления или редактирование ленты-->
-                    <div class="wrap-popup" ng-show="addFeedPopupVisibleEnabled || editFeedPopupVisibleEnabled" ng-click="addFeedPopupVisibleEnabled = false; editFeedPopupVisibleEnabled = false; feedNameEnabled = false; feedUrlEnabled = false"></div>
-                    <form class="popup" name="feedForm" ng-show="addFeedPopupVisibleEnabled || editFeedPopupVisibleEnabled">
-                        <div class="popup__title" ng-show="addFeedPopupVisibleEnabled">Добавление новой ленты</div>
-                        <div class="popup__title" ng-show="editFeedPopupVisibleEnabled">Редактирование ленты</div>
+                    <div class="wrapper-popup" ng-show="addFeedPopupVisibilityEnabled || editFeedPopupVisibilityEnabled" ng-click="hideFeedPopup()"></div>
+                    <form class="popup" name="feedForm" ng-show="addFeedPopupVisibilityEnabled || editFeedPopupVisibilityEnabled">
+                        <div class="popup__title" ng-show="addFeedPopupVisibilityEnabled">Добавление новой ленты</div>
+                        <div class="popup__title" ng-show="editFeedPopupVisibilityEnabled">Редактирование ленты</div>
                         <div class="popup__body">
                             <div class="popup__form-name">Название ленты</div>
-                            <div class="popup__wrap-input">
-                                <input class="popup__input" name="feedForm__name" type="text" placeholder="Название ленты" ng-style="feedNameEnabled && {'border-color': '#df4b41'}" ng-model="Feed['name']" required>
+                            <div class="popup__wrapper-input">
+                                <input class="popup__input" name="feedFormName" type="text" placeholder="Название ленты" ng-class="{true: 'border-error'}[feedNameEnabled]" ng-model="feed.name" required>
                                 <div class="popup__input-error" ng-show="feedNameEnabled">Введите название ленты</div>
                             </div>
                             <div class="popup__form-name" >URL</div>
-                            <div class="popup__wrap-input">
-                                <input class="popup__input" name="feedForm__url" type="url" placeholder="URL" ng-style="feedUrlEnabled && {'border-color': '#df4b41'}" ng-model="Feed['url']" required>
+                            <div class="popup__wrapper-input">
+                                <input class="popup__input" name="feedFormUrl" type="url" placeholder="URL" ng-class="{true: 'border-error'}[feedUrlEnabled]" ng-model="feed.url" required>
                                 <div class="popup__input-error" ng-show="feedUrlEnabled">URL не верный</div>
                             </div>
                             <div class="popup__form-name">Группа</div>
@@ -111,10 +107,10 @@
                                 <option ng-value="this.$index" ng-repeat="group in data.groups">{{group.name}}</option>
                             </select>
                         </div>
-                        <div class="popup__buttons">
-                            <a class="btn popup__cancel-button" href="#" ng-click="addFeedPopupVisibleEnabled = false; editFeedPopupVisibleEnabled = false; feedNameEnabled = false; feedUrlEnabled = false">Отменить</a>
-                            <a class="btn popup__add-button" href="#" ng-show="addFeedPopupVisibleEnabled" ng-click="validateFormFeed()">Добавить</a>
-                            <a class="btn popup__edit-button" href="#" ng-show="editFeedPopupVisibleEnabled" ng-click="validateFormFeed()">Редактировать</a>
+                        <div class="popup__button-container">
+                            <a class="popup__button popup__cancel-button" href="#" ng-click="hideFeedPopup()">Отменить</a>
+                            <a class="popup__button popup__add-button" href="#" ng-show="addFeedPopupVisibilityEnabled" ng-click="validateFormFeed()">Добавить</a>
+                            <a class="popup__button popup__edit-button" href="#" ng-show="editFeedPopupVisibilityEnabled" ng-click="validateFormFeed()">Редактировать</a>
                         </div>
                     </form>
                 </div>

@@ -56,30 +56,27 @@ html, body {
     flex-shrink: 0;
 }
 
-.sidebar__feed-group-list {
+.sidebar__group-list {
     margin-bottom: 20px;
     overflow-y: auto;
 }
 
-.sidebar__feed-group-list::-webkit-scrollbar-track
-{
+.sidebar__group-list::-webkit-scrollbar-track {
     background-color: #2b2e35;
     border-radius: 6px;
 }
 
-.sidebar__feed-group-list::-webkit-scrollbar
-{
+.sidebar__group-list::-webkit-scrollbar {
     width: 12px;
     background-color: #1d2027;
 }
 
-.sidebar__feed-group-list::-webkit-scrollbar-thumb
-{
+.sidebar__group-list::-webkit-scrollbar-thumb {
     background-color: #464a54;
     border-radius: 6px;
 }
 
-.sidebar__list-none {
+.sidebar__empty-list {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -89,7 +86,7 @@ html, body {
     font-family: "Open Sans", sans-serif;
 }
 
-.sidebar__feed-group {
+.sidebar__group {
     position: relative;
     display: flex;
     align-items: center;
@@ -97,15 +94,19 @@ html, body {
     cursor: pointer;
 }
 
-.sidebar__feed-group:hover {
+.sidebar__group:hover {
     background-color: #30333a;
 }
 
-.sidebar__feed-group:hover .feed-group__delete-icon {
+.sidebar__select-background {
+    background-color: #464a54;
+}
+
+.sidebar__group:hover .sidebar__group-delete-icon {
     visibility: visible;
 }
 
-.feed-group__margin-icon {
+.sidebar__group-margin-icon {
     margin-left: 28px;
     margin-right: 12px;
 }
@@ -142,13 +143,13 @@ html, body {
     color: #cc91ff;
 }
 
-.feed-group__title {
+.sidebar__group-title {
     color: #eeeeee;
     font-size: 13px;
     font-family: "Open Sans", sans-serif;
 }
 
-.feed-group__delete-icon {
+.sidebar__group-delete-icon {
     position: absolute;
     top: 10px;
     right: 14px;
@@ -157,7 +158,7 @@ html, body {
     visibility: hidden;
 }
 
-.feed-group__delete-icon:hover {
+.sidebar__group-delete-icon:hover {
     color: #b9b9b9;
 }
 
@@ -170,7 +171,7 @@ html, body {
     border-radius: 4px;
 }
 
-.sidebar__select {
+.sidebar__select-color-marker {
     width: 35px;
     background-color: #464a54;
     background-clip: padding-box;
@@ -199,7 +200,7 @@ html, body {
     outline: none;
 }
 
-.wrap-content {
+.wrapper-content {
     background-color: #f0f1f5;
     padding-top: 14px;
     padding-left: 20px;
@@ -241,25 +242,22 @@ html, body {
     overflow-y: auto;
 }
 
-.feed-list::-webkit-scrollbar-track
-{
+.feed-list::-webkit-scrollbar-track {
     background-color: #ffffff;
     border-left: 1px solid #c8d3de;
 }
 
-.feed-list::-webkit-scrollbar
-{
+.feed-list::-webkit-scrollbar {
     width: 12px;
     border: #c8d3de;
 }
 
-.feed-list::-webkit-scrollbar-thumb
-{
+.feed-list::-webkit-scrollbar-thumb {
     background-color: #c8d3de;
 
 }
 
-.feed-list__list-none {
+.feed-list__empty-list {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -285,7 +283,6 @@ html, body {
     cursor: pointer;
 }
 
-
 .feed-list__feed-name {
     margin-bottom: 10px;
     color: #1f7ca3;
@@ -299,42 +296,31 @@ html, body {
     font-family: "Open Sans", sans-serif;
 }
 
-.feed-list__edit-icon,
-.feed-list__delete-icon,
-.feed-list__navigate-next-icon {
+.feed-list__icon-container {
     position: absolute;
-    color: #7a7f8d;
-    font-size: 18px;
-}
-
-.feed-list__edit-icon:hover,
-.feed-list__delete-icon:hover {
-    position: absolute;
-    color: #606573;
-    font-size: 18px;
-}
-
-.feed-list__edit-icon {
-    right: 35px;
-    bottom: 15px;
-    visibility: hidden;
-}
-
-.feed-list__delete-icon {
     right: 12px;
     bottom: 15px;
     visibility: hidden;
 }
 
+.feed-list__icon {
+    color: #7a7f8d;
+    font-size: 18px;
+}
+
+.feed-list__icon:hover {
+    color: #606573;
+}
+
 .feed-list__navigate-next-icon {
+    position: absolute;
     right: 5px;
     bottom: 39px;
     color: #7fb1c6;
     visibility: hidden;
 }
 
-.feed-list__feed-container:hover .feed-list__edit-icon,
-.feed-list__feed-container:hover  .feed-list__delete-icon,
+.feed-list__feed-container:hover .feed-list__icon-container,
 .feed-list__feed-container:hover .feed-list__navigate-next-icon  {
     visibility: visible;
 }
@@ -346,19 +332,16 @@ html, body {
     overflow-y: auto;
 }
 
-.article::-webkit-scrollbar-track
-{
+.article::-webkit-scrollbar-track {
     background-color: #ffffff;
 }
 
-.article::-webkit-scrollbar
-{
+.article::-webkit-scrollbar {
     width: 12px;
     border: #c8d3de;
 }
 
-.article::-webkit-scrollbar-thumb
-{
+.article::-webkit-scrollbar-thumb {
     background-color: #c8d3de;
 
 }
@@ -410,7 +393,7 @@ html, body {
     float: right;
 }
 
-.article__block-with-text {
+.article__text-block {
     margin-bottom: 5px;
 }
 
@@ -432,13 +415,13 @@ html, body {
     clear: both;
 }
 
-.article__line {
+.article__divider {
     margin-bottom: 20px;
     height: 1px;
     background-color: #dfdfdf;
 }
 
-.wrap-popup {
+.wrapper-popup {
     position: absolute;
     height: 100%;
     width: 100%;
@@ -486,7 +469,7 @@ html, body {
     line-height: 24px;
 }
 
-.popup__wrap-input {
+.popup__wrapper-input {
     position: relative;
 }
 
@@ -516,41 +499,52 @@ html, body {
     border-color: #df4b41;
 }
 
-.popup__buttons {
+.popup__button-container {
     display: flex;
     justify-content: flex-end;
     padding-top: 19px;
     padding-right: 20px;
 }
 
-.popup__cancel-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-right: 9px;
+.popup__button {
+    padding: 3px 5px;
     width: 110px;
     height: 34px;
+    text-align: center;
+    vertical-align: middle;
+    user-select: none;
+    border-radius: 4px;
     font-family: "Open Sans", sans-serif;
     font-size: 13px;
     font-weight: normal;
     line-height: 24px;
+}
+
+.popup__button:hover {
+    text-decoration: none;
+}
+
+.popup__cancel-button {
+    margin-right: 9px;
     color: #333333;
     background-color: #f7f7f7;
     border: 1px solid #cccccc;
 }
 
+.popup__cancel-button:hover {
+    color: #333333;
+    background-color: #dcdcdc;
+}
+
 .popup__add-button,
 .popup__edit-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 110px;
-    height: 34px;
-    font-family: "Open Sans", sans-serif;
-    font-size: 13px;
-    font-weight: normal;
-    line-height: 24px;
     color: #ffffff;
     background-color: #397eb9;
     border: 1px solid #2b669a;
+}
+
+.popup__add-button:hover,
+.popup__edit-button:hover {
+    color: #ffffff;
+    background-color: #3a9bd7;
 }
