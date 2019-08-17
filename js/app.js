@@ -1,4 +1,3 @@
-//Модуль
 var model = {
     groups: [
         {
@@ -85,8 +84,6 @@ rssReader.controller('rssReaderCtrl', function ($scope) {
     $scope.feedNameEnabled = false;
     $scope.feedUrlEnabled = false;
 
-    $scope.clickGroup = false;
-
     $scope.selectGroup = function () {
         $scope.selectGroupIndex = this.$index;
     };
@@ -100,7 +97,7 @@ rssReader.controller('rssReaderCtrl', function ($scope) {
             )[0]['className'];
     };
 
-    $scope.validateFormGroup = function () {
+    $scope.validateGroupForm = function () {
         if ($scope.groupForm.groupFormName.$valid) {
             $scope.addNewGroup();
         }
@@ -129,15 +126,15 @@ rssReader.controller('rssReaderCtrl', function ($scope) {
         $scope.feedUrlEnabled = false;
     };
 
-    $scope.confirmDeleteGroup = function () {
+    $scope.confirmGroupDeletion = function () {
         $scope.feedCount = $scope.data.groups[this.$index].feeds.length;
-        $scope.confirmMessage = 'В данной группе находится ' +$scope.feedCount+ ' лент(а/ы). Вы уверены, что хотите удалить её?';
-        if ($scope.feedCount === 0 || confirm($scope.confirmMessage)) {
+        $scope.confirmationMessage = 'В данной группе находится ' +$scope.feedCount+ ' лент(а/ы). Вы уверены, что хотите удалить её?';
+        if ($scope.feedCount === 0 || confirm($scope.confirmationMessage)) {
             $scope.data.groups.splice(this.$index, 1);
         }
     };
 
-    $scope.validateFormFeed = function () {
+    $scope.validateFeedForm = function () {
         if ($scope.feedForm.$valid) {
             if ($scope.addFeedPopupVisibilityEnabled) {
                 $scope.addNewFeed($scope.selectGroupIndex);
@@ -167,9 +164,9 @@ rssReader.controller('rssReaderCtrl', function ($scope) {
         $scope.feed = {};
     };
 
-    $scope.confirmDeleteFeed = function () {
-        $scope.confirmMessage = 'Вы уверены, что хотите удалить данную ленту?';
-        if (confirm($scope.confirmMessage)) {
+    $scope.confirmFeedDeletion = function () {
+        $scope.confirmationMessage = 'Вы уверены, что хотите удалить данную ленту?';
+        if (confirm($scope.confirmationMessage)) {
             $scope.data.groups[$scope.selectGroupIndex].feeds.splice(this.$index, 1);
         }
     };

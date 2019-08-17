@@ -20,17 +20,17 @@
                     <div class="sidebar__group" ng-class="{true: 'sidebar__select-background'}[$index === selectGroupIndex]" ng-repeat="group in data.groups" ng-click="selectGroup()">
                         <i class="material-icons size-icons sidebar__group-margin-icon" ng-class="searchColorClass(group.colorId)">radio_button_checked</i>
                         <div class="sidebar__group-title">{{group.name}} ({{group.feeds.length}})</div>
-                        <i class="material-icons sidebar__group-delete-icon" ng-click="confirmDeleteGroup()">delete</i>
+                        <i class="material-icons sidebar__group-delete-icon" ng-click="confirmGroupDeletion()">delete</i>
                     </div>
                 </div>
                 <form class="sidebar__form" name="groupForm">
                     <select class="material-icons sidebar__select-color-marker" ng-model="group.colorId" ng-class="searchColorClass(group.colorId)">
-                        <option class="material-icons size-icons color-red" ng-repeat="colorMarker in data.colorMarkers" ng-class="colorMarker.className" ng-value="colorMarker.id">radio_button_checked</option>
+                        <option class="material-icons size-icons" ng-repeat="colorMarker in data.colorMarkers" ng-class="colorMarker.className" ng-value="colorMarker.id">radio_button_checked</option>
                     </select>
-                    <input class="sidebar__create-group" name="groupFormName" type="text" placeholder="Новая лента" ng-model="group.name" ng-keyup="$event.keyCode == 13 && validateFormGroup()" required>
+                    <input class="sidebar__create-group" name="groupFormName" type="text" placeholder="Новая лента" ng-model="group.name" ng-keyup="$event.keyCode == 13 && validateGroupForm()" required>
                 </form>
             </div>
-            <div class="wrapper-content">
+            <div class="content-wrapper">
                 <input class="content__search" type="search" placeholder="Поиск по новостям...">
                 <div class="content">
                     <div class="feed-list">
@@ -40,7 +40,7 @@
                             <p class="feed-list__feed-url">{{link.url}}</p>
                             <div class="feed-list__icon-container">
                                 <i class="material-icons feed-list__icon" ng-click="showEditFeedPopup()">edit</i>
-                                <i class="material-icons feed-list__icon" ng-click="confirmDeleteFeed()">delete</i>
+                                <i class="material-icons feed-list__icon" ng-click="confirmFeedDeletion()">delete</i>
                             </div>
                             <i class="material-icons feed-list__navigate-next-icon">navigate_next</i>
                         </div>
@@ -87,18 +87,18 @@
                         </div>
                     </div>
                     <!--Форма для добавления или редактирование ленты-->
-                    <div class="wrapper-popup" ng-show="addFeedPopupVisibilityEnabled || editFeedPopupVisibilityEnabled" ng-click="hideFeedPopup()"></div>
+                    <div class="popup-wrapper" ng-show="addFeedPopupVisibilityEnabled || editFeedPopupVisibilityEnabled" ng-click="hideFeedPopup()"></div>
                     <form class="popup" name="feedForm" ng-show="addFeedPopupVisibilityEnabled || editFeedPopupVisibilityEnabled">
                         <div class="popup__title" ng-show="addFeedPopupVisibilityEnabled">Добавление новой ленты</div>
                         <div class="popup__title" ng-show="editFeedPopupVisibilityEnabled">Редактирование ленты</div>
                         <div class="popup__body">
                             <div class="popup__form-name">Название ленты</div>
-                            <div class="popup__wrapper-input">
+                            <div class="popup__input-wrapper">
                                 <input class="popup__input" name="feedFormName" type="text" placeholder="Название ленты" ng-class="{true: 'border-error'}[feedNameEnabled]" ng-model="feed.name" required>
                                 <div class="popup__input-error" ng-show="feedNameEnabled">Введите название ленты</div>
                             </div>
                             <div class="popup__form-name">URL</div>
-                            <div class="popup__wrapper-input">
+                            <div class="popup__input-wrapper">
                                 <input class="popup__input" name="feedFormUrl" type="url" placeholder="URL" ng-class="{true: 'border-error'}[feedUrlEnabled]" ng-model="feed.url" required>
                                 <div class="popup__input-error" ng-show="feedUrlEnabled">URL не верный</div>
                             </div>
@@ -109,8 +109,8 @@
                         </div>
                         <div class="popup__button-container">
                             <a class="popup__button popup__cancel-button" href="#" ng-click="hideFeedPopup()">Отменить</a>
-                            <a class="popup__button popup__add-button" href="#" ng-show="addFeedPopupVisibilityEnabled" ng-click="validateFormFeed()">Добавить</a>
-                            <a class="popup__button popup__edit-button" href="#" ng-show="editFeedPopupVisibilityEnabled" ng-click="validateFormFeed()">Редактировать</a>
+                            <a class="popup__button popup__add-button" href="#" ng-show="addFeedPopupVisibilityEnabled" ng-click="validateFeedForm()">Добавить</a>
+                            <a class="popup__button popup__edit-button" href="#" ng-show="editFeedPopupVisibilityEnabled" ng-click="validateFeedForm()">Редактировать</a>
                         </div>
                     </form>
                 </div>

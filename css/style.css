@@ -200,7 +200,7 @@ html, body {
     outline: none;
 }
 
-.wrapper-content {
+.content-wrapper {
     background-color: #f0f1f5;
     padding-top: 14px;
     padding-left: 20px;
@@ -421,7 +421,7 @@ html, body {
     background-color: #dfdfdf;
 }
 
-.wrapper-popup {
+.popup-wrapper {
     position: absolute;
     height: 100%;
     width: 100%;
@@ -469,7 +469,7 @@ html, body {
     line-height: 24px;
 }
 
-.popup__wrapper-input {
+.popup__input-wrapper {
     position: relative;
 }
 
