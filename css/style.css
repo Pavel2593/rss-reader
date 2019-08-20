@@ -2,6 +2,10 @@ html, body {
     height: 100%;
 }
 
+*{
+    box-sizing: border-box;
+}
+
 .page {
     display: flex;
     height: 100%;
@@ -111,8 +115,12 @@ html, body {
     margin-right: 12px;
 }
 
-.size-icons {
+.size-marker-icons {
     font-size: 12px;
+}
+
+.size-icons {
+    font-size: 18px;
 }
 
 .color-red {
@@ -176,7 +184,6 @@ html, body {
     background-color: #464a54;
     background-clip: padding-box;
     padding: 9px 11px 8px 12px;
-    font-size: 12px;
     border: none;
     border-top: 1px solid #62656e;
     border-top-left-radius: 2px;
@@ -208,9 +215,15 @@ html, body {
     flex-direction: column;
 }
 
-.content__search {
+.content__search-wrapper {
+    position: relative;
     width: 322px;
+}
+
+.content__search {
+    width: 100%;
     height: 34px;
+    padding-right: 20px;
     padding-left: 12px;
     margin-bottom: 10px;
     border: 1px solid #cccccc;
@@ -219,6 +232,18 @@ html, body {
     font-size: 13px;
     flex-shrink: 0;
     outline: none;
+}
+
+.content__search-icon {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    color: #7a7f8d;
+    cursor: pointer;
+}
+
+.content__search-icon:hover {
+    color: #606573;
 }
 
 .content {
@@ -254,7 +279,6 @@ html, body {
 
 .feed-list::-webkit-scrollbar-thumb {
     background-color: #c8d3de;
-
 }
 
 .feed-list__empty-list {
@@ -283,10 +307,21 @@ html, body {
     cursor: pointer;
 }
 
-.feed-list__feed-name {
+.feed-list__name-wrapper {
     margin-bottom: 10px;
+    display: flex;
+}
+
+.feed-list__feed-favicon {
+    height: 16px;
+    width: 16px;
+    margin-right: 4px;
+}
+
+.feed-list__feed-name {
     color: #1f7ca3;
     font-size: 14px;
+    font-weight: normal;
     font-family: "Open Sans", sans-serif;
 }
 
@@ -294,6 +329,8 @@ html, body {
     color: #7a7f8d;
     font-size: 12px;
     font-family: "Open Sans", sans-serif;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .feed-list__icon-container {
@@ -305,7 +342,6 @@ html, body {
 
 .feed-list__icon {
     color: #7a7f8d;
-    font-size: 18px;
 }
 
 .feed-list__icon:hover {
@@ -352,6 +388,7 @@ html, body {
     font-size: 26px;
     font-family: "Open Sans", sans-serif;
     line-height: 24px;
+    font-weight: normal;
 }
 
 .article__read-status {
@@ -529,6 +566,7 @@ html, body {
     color: #333333;
     background-color: #f7f7f7;
     border: 1px solid #cccccc;
+    text-decoration: none;
 }
 
 .popup__cancel-button:hover {
@@ -541,6 +579,7 @@ html, body {
     color: #ffffff;
     background-color: #397eb9;
     border: 1px solid #2b669a;
+    text-decoration: none;
 }
 
 .popup__add-button:hover,

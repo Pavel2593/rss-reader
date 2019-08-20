@@ -13,14 +13,15 @@ var model = {
             name: 'Дизайн',
             colorId: 6,
             feeds: [
-                {name: 'Дизай', url: 'дизайн.рф'}]
+                {name: '15 шрифтов для печати', url: 'https://skillbox.ru/media/design/15_shriftov_ot_skillbox/'}]
         },
 
         {
             name: 'Смешнявки',
             colorId: 1,
             feeds: [
-                {name: 'Пикабу', url: 'Пикабу.рф'}]
+                {name: 'Пикабу', url: 'https://pikabu.ru/story/byistro_styiril_i_ushel_nazyivaetsya_nashel_6878252'},
+                {name: 'World of WarCraft', url: 'https://worldofwarcraft.com/ru-ru/'}]
         }],
 
     colorMarkers: [
@@ -61,10 +62,8 @@ var model = {
     ]
 };
 
-//Модуль
 var rssReader = angular.module('rssReaderApp', []);
 
-//Контроллер
 rssReader.controller('rssReaderCtrl', function ($scope) {
     $scope.data = model;
 
@@ -98,7 +97,7 @@ rssReader.controller('rssReaderCtrl', function ($scope) {
     };
 
     $scope.validateGroupForm = function () {
-        if ($scope.groupForm.groupFormName.$valid) {
+        if (!($scope.group.name === '')) {
             $scope.addNewGroup();
         }
     };
@@ -111,21 +110,6 @@ rssReader.controller('rssReaderCtrl', function ($scope) {
         };
     };
 
-    $scope.showAddFeedPopup = function () {
-        $scope.selectPopupGroupIndex = $scope.selectGroupIndex;
-        $scope.addFeedPopupVisibilityEnabled = true;
-        $scope.feed = {
-            url: ''
-        };
-    };
-
-    $scope.hideFeedPopup = function () {
-        $scope.addFeedPopupVisibilityEnabled = false;
-        $scope.editFeedPopupVisibilityEnabled = false;
-        $scope.feedNameEnabled = false;
-        $scope.feedUrlEnabled = false;
-    };
-
     $scope.confirmGroupDeletion = function () {
         $scope.feedCount = $scope.data.groups[this.$index].feeds.length;
         $scope.confirmationMessage = 'В данной группе находится ' +$scope.feedCount+ ' лент(а/ы). Вы уверены, что хотите удалить её?';
@@ -134,10 +118,25 @@ rssReader.controller('rssReaderCtrl', function ($scope) {
         }
     };
 
+    $scope.showAddFeedPopup = function () {
+        $scope.selectPopupGroupIndex = $scope.selectGroupIndex;
+        $scope.addFeedPopupVisibilityEnabled = true;
+        $scope.feed = {
+            url: ''
+        };
+    };
+
+    $scope.showEditFeedPopup = function () {
+        $scope.selectPopupGroupIndex = $scope.selectGroupIndex;
+        $scope.editFeedIndex = this.$index;
+        $scope.editFeedPopupVisibilityEnabled = true;
+        Object.assign($scope.feed, $scope.data.groups[$scope.selectGroupIndex].feeds[$scope.editFeedIndex]);
+    };
+
     $scope.validateFeedForm = function () {
         if ($scope.feedForm.$valid) {
             if ($scope.addFeedPopupVisibilityEnabled) {
-                $scope.addNewFeed($scope.selectGroupIndex);
+                $scope.addNewFeed($scope.selectPopupGroupIndex);
                 $scope.addFeedPopupVisibilityEnabled = false;
                 $scope.feedNameEnabled = false;
                 $scope.feedUrlEnabled = false;
@@ -159,22 +158,20 @@ rssReader.controller('rssReaderCtrl', function ($scope) {
         }
     };
 
+    $scope.getFavIconUrl = function (url) {
+        $scope.arr = url.split('/', 3);
+        $scope.favIconUrl = '';
+        $scope.arr.forEach(function (item) {
+            $scope.favIconUrl = $scope.favIconUrl + item + '/';
+        });
+        $scope.favIconUrl = $scope.favIconUrl + 'favicon.ico';
+        return $scope.favIconUrl;
+    };
+
     $scope.addNewFeed = function (index) {
         $scope.data.groups[index].feeds.push(Object.assign($scope.feed));
+        console.log($scope.data.groups);
         $scope.feed = {};
-    };
-
-    $scope.confirmFeedDeletion = function () {
-        $scope.confirmationMessage = 'Вы уверены, что хотите удалить данную ленту?';
-        if (confirm($scope.confirmationMessage)) {
-            $scope.data.groups[$scope.selectGroupIndex].feeds.splice(this.$index, 1);
-        }
-    };
-
-    $scope.showEditFeedPopup = function () {
-        $scope.editFeedIndex = this.$index;
-        $scope.editFeedPopupVisibilityEnabled = true;
-        Object.assign($scope.feed, $scope.data.groups[$scope.selectGroupIndex].feeds[$scope.editFeedIndex]);
     };
 
     $scope.editFeed = function () {
@@ -184,6 +181,20 @@ rssReader.controller('rssReaderCtrl', function ($scope) {
         } else {
             $scope.data.groups[$scope.selectGroupIndex].feeds.splice($scope.editFeedIndex, 1);
             $scope.addNewFeed($scope.selectPopupGroupIndex);
+        }
+    };
+
+    $scope.hideFeedPopup = function () {
+        $scope.addFeedPopupVisibilityEnabled = false;
+        $scope.editFeedPopupVisibilityEnabled = false;
+        $scope.feedNameEnabled = false;
+        $scope.feedUrlEnabled = false;
+    };
+
+    $scope.confirmFeedDeletion = function () {
+        $scope.confirmationMessage = 'Вы уверены, что хотите удалить данную ленту?';
+        if (confirm($scope.confirmationMessage)) {
+            $scope.data.groups[$scope.selectGroupIndex].feeds.splice(this.$index, 1);
         }
     };
 });

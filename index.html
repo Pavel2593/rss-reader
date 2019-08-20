@@ -5,11 +5,12 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans|Material+Icons" rel="stylesheet">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link href="css/reset.css" rel="stylesheet">
         <link href="css/style.css" rel="stylesheet">
+        <script src="js/libs/angular-1.7.8.js"></script>
+        <script src="js/app.js"></script>
     </head>
-    <body ng-controller="rssReaderCtrl">
+    <body ng-controller="rssReaderCtrl" ng-cloak>
         <div class="page">
             <div class="sidebar">
                 <div class="sidebar__logo"></div>
@@ -17,30 +18,36 @@
                 <div class="sidebar__divider"></div>
                 <div class="sidebar__group-list">
                     <div class="sidebar__empty-list" ng-show="data.groups.length === 0">Список пуст</div>
-                    <div class="sidebar__group" ng-class="{true: 'sidebar__select-background'}[$index === selectGroupIndex]" ng-repeat="group in data.groups" ng-click="selectGroup()">
-                        <i class="material-icons size-icons sidebar__group-margin-icon" ng-class="searchColorClass(group.colorId)">radio_button_checked</i>
+                    <div class="sidebar__group" ng-class="{'sidebar__select-background': $index === selectGroupIndex}" ng-repeat="group in data.groups" ng-click="selectGroup()">
+                        <i class="material-icons size-marker-icons sidebar__group-margin-icon" ng-class="searchColorClass(group.colorId)">radio_button_checked</i>
                         <div class="sidebar__group-title">{{group.name}} ({{group.feeds.length}})</div>
-                        <i class="material-icons sidebar__group-delete-icon" ng-click="confirmGroupDeletion()">delete</i>
+                        <i class="material-icons size-icons sidebar__group-delete-icon" ng-click="confirmGroupDeletion()">delete</i>
                     </div>
                 </div>
                 <form class="sidebar__form" name="groupForm">
-                    <select class="material-icons sidebar__select-color-marker" ng-model="group.colorId" ng-class="searchColorClass(group.colorId)">
-                        <option class="material-icons size-icons" ng-repeat="colorMarker in data.colorMarkers" ng-class="colorMarker.className" ng-value="colorMarker.id">radio_button_checked</option>
+                    <select class="material-icons size-marker-icons sidebar__select-color-marker" ng-model="group.colorId" ng-class="searchColorClass(group.colorId)">
+                        <option class="material-icons size-marker-icons" ng-repeat="colorMarker in data.colorMarkers" ng-class="colorMarker.className" ng-value="colorMarker.id">radio_button_checked</option>
                     </select>
-                    <input class="sidebar__create-group" name="groupFormName" type="text" placeholder="Новая лента" ng-model="group.name" ng-keyup="$event.keyCode == 13 && validateGroupForm()" required>
+                    <input class="sidebar__create-group" name="groupFormName" autocomplete="off" type="text" placeholder="Новая группа" ng-model="group.name" ng-keyup="$event.keyCode == 13 && validateGroupForm()">
                 </form>
             </div>
             <div class="content-wrapper">
-                <input class="content__search" type="search" placeholder="Поиск по новостям...">
+                <div class="content__search-wrapper">
+                    <input class="content__search" type="search" placeholder="Поиск по новостям...">
+                    <i class="material-icons size-icons content__search-icon">search</i>
+                </div>
                 <div class="content">
                     <div class="feed-list">
                         <div class="feed-list__empty-list" ng-show="data.groups[selectGroupIndex].feeds.length === 0">Список пуст</div>
-                        <div class="feed-list__feed-container" ng-repeat="link in data.groups[selectGroupIndex].feeds">
-                            <h1 class="feed-list__feed-name">{{link.name}}</h1>
-                            <p class="feed-list__feed-url">{{link.url}}</p>
+                        <div class="feed-list__feed-container" ng-repeat="feed in data.groups[selectGroupIndex].feeds">
+                            <div class="feed-list__name-wrapper">
+                                <img class="feed-list__feed-favicon" ng-src="{{getFavIconUrl(feed.url)}}">
+                                <h1 class="feed-list__feed-name">{{feed.name}}</h1>
+                            </div>
+                            <p class="feed-list__feed-url">{{feed.url}}</p>
                             <div class="feed-list__icon-container">
-                                <i class="material-icons feed-list__icon" ng-click="showEditFeedPopup()">edit</i>
-                                <i class="material-icons feed-list__icon" ng-click="confirmFeedDeletion()">delete</i>
+                                <i class="material-icons size-icons feed-list__icon" ng-click="showEditFeedPopup()">edit</i>
+                                <i class="material-icons size-icons feed-list__icon" ng-click="confirmFeedDeletion()">delete</i>
                             </div>
                             <i class="material-icons feed-list__navigate-next-icon">navigate_next</i>
                         </div>
@@ -94,7 +101,7 @@
                         <div class="popup__body">
                             <div class="popup__form-name">Название ленты</div>
                             <div class="popup__input-wrapper">
-                                <input class="popup__input" name="feedFormName" type="text" placeholder="Название ленты" ng-class="{true: 'border-error'}[feedNameEnabled]" ng-model="feed.name" required>
+                                <input class="popup__input" name="feedFormName" type="text" placeholder="Название ленты" ng-model="feed.name" required>
                                 <div class="popup__input-error" ng-show="feedNameEnabled">Введите название ленты</div>
                             </div>
                             <div class="popup__form-name">URL</div>
@@ -116,8 +123,5 @@
                 </div>
             </div>
         </div>
-        <script src="js/libs/jquery-3.3.1.min.js"></script>
-        <script src="js/libs/angular-1.7.8.js"></script>
-        <script src="js/app.js"></script>
     </body>
 </html>
