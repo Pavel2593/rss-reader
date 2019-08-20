@@ -159,9 +159,8 @@ rssReader.controller('rssReaderCtrl', function ($scope) {
     };
 
     $scope.getFavIconUrl = function (url) {
-        $scope.arr = url.split('/', 3);
         $scope.favIconUrl = '';
-        $scope.arr.forEach(function (item) {
+        url.split('/', 3).forEach(function (item) {
             $scope.favIconUrl = $scope.favIconUrl + item + '/';
         });
         $scope.favIconUrl = $scope.favIconUrl + 'favicon.ico';
