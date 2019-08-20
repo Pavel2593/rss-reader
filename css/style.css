@@ -99,11 +99,11 @@ html, body {
 }
 
 .sidebar__group:hover {
-    background-color: #30333a;
+    background-color: #464a54;
 }
 
 .sidebar__select-background {
-    background-color: #464a54;
+    background-color: #30333a;
 }
 
 .sidebar__group:hover .sidebar__group-delete-icon {
@@ -242,10 +242,6 @@ html, body {
     cursor: pointer;
 }
 
-.content__search-icon:hover {
-    color: #606573;
-}
-
 .content {
     display: flex;
     flex-shrink: 1;
@@ -310,6 +306,7 @@ html, body {
 .feed-list__name-wrapper {
     margin-bottom: 10px;
     display: flex;
+    align-items: center;
 }
 
 .feed-list__feed-favicon {
@@ -326,6 +323,7 @@ html, body {
 }
 
 .feed-list__feed-url {
+    padding-bottom: 1px;
     color: #7a7f8d;
     font-size: 12px;
     font-family: "Open Sans", sans-serif;
